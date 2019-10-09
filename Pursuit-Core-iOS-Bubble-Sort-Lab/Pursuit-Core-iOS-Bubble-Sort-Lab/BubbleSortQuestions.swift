@@ -55,6 +55,26 @@ func bubbleSortWithoutMovingNegatives<T: SignedInteger>(arr: [T], by isSorted: (
 // https://www.geeksforgeeks.org/cocktail-sort/
 
 func cocktailSort<T: Comparable>(arr: [T], by isSorted: (T, T) -> Bool) -> [T] {
+    var arr = arr
+    var madeSwap = false
+    repeat {
+        madeSwap = false
+        var reversedArr = Array(arr.reversed())
+        for i in 0..<arr.count - 1 {
+            if !isSorted(arr[i],arr[i+1]) && arr[i] != arr[i+1] {
+                arr.swapAt(i, i+1)
+                madeSwap = true
+                reversedArr = arr.reversed()
+            }
+        }
+        for i in 0..<reversedArr.count - 1 {
+            if isSorted(reversedArr[i],reversedArr[i+1]) && reversedArr[i] != reversedArr[i+1] {
+                reversedArr.swapAt(i, i+1)
+                madeSwap = true
+                arr = reversedArr.reversed()
+            }
+        }
+    } while madeSwap
     return arr
 }
 
