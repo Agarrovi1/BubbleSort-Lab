@@ -5,6 +5,17 @@ import Foundation
 // Implement bubble sort that accepts a closure about how to sort elements
 
 func bubbleSort<T: Comparable>(arr: [T], by isSorted: (T, T) -> Bool) -> [T] {
+    var arr = arr
+    var madeSwap = false
+    repeat {
+        madeSwap = false
+        for i in 0..<arr.count - 1 {
+            if !isSorted(arr[i],arr[i+1]) && arr[i] != arr[i+1] {
+                arr.swapAt(i, i+1)
+                madeSwap = true
+            }
+        }
+    } while madeSwap
     return arr
 }
 
