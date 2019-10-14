@@ -29,7 +29,7 @@ func bubbleSortWithoutMovingNegatives<T: SignedInteger>(arr: [T], by isSorted: (
     var madeSwap = false
     repeat {
         madeSwap = false
-        print(arr)
+        //print(arr)
         for i in 0...arr.count - 1 {
             if arr[i] < 0 {
                 continue
@@ -83,5 +83,50 @@ func cocktailSort<T: Comparable>(arr: [T], by isSorted: (T, T) -> Bool) -> [T] {
 // Implement bubble sort on a linked list
 
 func bubbleSort<T: Comparable>(list: LinkedList<T>, by isSorted: (T, T) -> Bool) -> LinkedList<T> {
+    var madeSwap: Bool
+
+    repeat {
+        madeSwap = false
+        print(list)
+        for i in 0..<list.count - 1 {
+            let lhs = list.node(at: i)
+            let rhs = list.node(at: i+1)
+            if !isSorted(lhs.value,rhs.value) && lhs.value != rhs.value {
+                list.insert(rhs.value, at: i)
+                list.remove(at: i+2)
+                madeSwap = true
+            }
+        }
+            
+//
+//
+//        var currentLhs = list.head
+//        while let lhs = currentLhs, let rhs = lhs.next {
+//            defer {
+//                currentLhs = rhs
+//            }
+//            guard !isSorted(lhs.value,rhs.value) && lhs.value != rhs.value else {
+//                break
+//            }
+//
+//
+//            madeSwap = true
+//        }
+
+        
+        
+//        while currentrhs != nil || currentrhs?.next != nil {
+//            if let lhs = currentlhs, let rhs = currentrhs {
+//                if !isSorted(lhs.value,rhs.value) && lhs.value != rhs.value {
+//                    let temp = lhs.value
+//                    currentlhs?.value = rhs.value
+//                    currentrhs?.value = temp
+//
+//                    madeSwap = true
+//                }
+//            }
+//            currentlhs = currentlhs?.next
+//        }
+    } while madeSwap
     return list
 }
